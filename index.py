@@ -54,7 +54,18 @@ def main():
         "ETH/USDT",
         "SOL/USDT",
         "ADA/USDT",
-        "TRUMP/USDT"
+        "TRUMP/USDT",
+        "XRP/USDT",
+        "LTC/USDT",
+        "DOT/USDT",
+        "DOGE/USDT",
+        "BNB/USDT"
+        "SHIB/USDT",
+        "MATIC/USDT",
+        "LINK/USDT",
+        "UNI/USDT",
+        "AVAX/USDT",
+        "ALGO/USDT",
     ]
     timeframes = ["1d", "1h", "15m", "5m", "1w"]
     exchange = ccxt.binance()
