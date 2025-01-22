@@ -59,7 +59,7 @@ def main():
         "LTC/USDT",
         "DOT/USDT",
         "DOGE/USDT",
-        "BNB/USDT"
+        "BNB/USDT",
         "SHIB/USDT",
         "MATIC/USDT",
         "LINK/USDT",
