@@ -54,18 +54,12 @@ def main():
         "ETH/USDT",
         "SOL/USDT",
         "ADA/USDT",
-        "TRUMP/USDT",
         "XRP/USDT",
         "LTC/USDT",
         "DOT/USDT",
         "DOGE/USDT",
         "BNB/USDT",
         "SHIB/USDT",
-        "MATIC/USDT",
-        "LINK/USDT",
-        "UNI/USDT",
-        "AVAX/USDT",
-        "ALGO/USDT",
     ]
     timeframes = ["1d", "1h", "15m", "5m", "1w"]
     exchange = ccxt.binance()
@@ -87,14 +81,26 @@ def main():
                     rsi_value = get_rsi(exchange, symbol, tf)
                     interval_minutes = interval_map.get(tf, 60)
                     
-                    if rsi_value > 75 or rsi_value < 25:
-                        last_notif_time = last_notification[symbol][tf]
-                        if (last_notif_time is None or
-                            (current_time - last_notif_time).total_seconds() >= interval_minutes * 60):
-                            message = f"{symbol} RSI on {tf} is {rsi_value:.2f}!"
-                            send_notification(message)
-                            print(message)
-                            last_notification[symbol][tf] = current_time
+                    if tf == "5m":
+                        if rsi_value > 75 or rsi_value < 25:
+                            last_notif_time = last_notification[symbol][tf]
+                            if (last_notif_time is None or
+                                (current_time - last_notif_time).total_seconds() >= interval_minutes * 60):
+                                message = f"{symbol} RSI on {tf} is {rsi_value:.2f}!"
+                                send_notification(message)
+                                print(message)
+                                last_notification[symbol][tf] = current_time
+                        continue
+
+                    else:
+                        if rsi_value > 70 or rsi_value < 30:
+                            last_notif_time = last_notification[symbol][tf]
+                            if (last_notif_time is None or
+                                (current_time - last_notif_time).total_seconds() >= interval_minutes * 60):
+                                message = f"{symbol} RSI on {tf} is {rsi_value:.2f}!"
+                                send_notification(message)
+                                print(message)
+                                last_notification[symbol][tf] = current_time
                 
                 except Exception as e:
                     print(f"Error with {symbol} on {tf} basis: {e}")
